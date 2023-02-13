@@ -15,7 +15,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>features</module>
+		<module>features-microservice</module>
+		<module>routes-microservice</module>
 	</modules>
 
 	<name>connect</name>
