@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/coffee-shops")
+@RequestMapping(value = "/api/v2/features/coffee-shops")
 @Validated
 @CrossOrigin(origins = "*")
 public class CoffeeShopRestController {

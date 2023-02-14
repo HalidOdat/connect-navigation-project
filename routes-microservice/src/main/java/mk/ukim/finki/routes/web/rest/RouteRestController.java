@@ -9,7 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/route")
+@RequestMapping(value = "/api/v2/route")
 @Validated
 @CrossOrigin(origins = "*")
 public class RouteRestController {

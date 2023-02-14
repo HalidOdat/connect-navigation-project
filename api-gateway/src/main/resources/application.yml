@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+   gateway:
+      routes:
+        - id: routes-microservice
+          uri: lb://ROUTES
+          predicates:
+            - Path=/api/v2/route/**
+
+        - id: features-microservice
+          uri: lb://FEATURES
+          predicates:
+            - Path=/api/v2/features/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    enabled: true
