@@ -28,6 +28,50 @@ services:
       - postgres
     restart: unless-stopped
 
+  eureka-server:
+    image: connectnavigation.azurecr.io/eureka-server
+    container_name: eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+
+  features-microservice:
+    image: connectnavigation.azurecr.io/features-microservice
+    container_name: features-mircoservice
+    build:
+      context: ./features-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "1111:1111"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - 'eureka-server'
+      - 'postgres'
+
+  routes-microservice:
+    image: connectnavigation.azurecr.io/routes-microservice
+    container_name: routes-mircoservice
+    build:
+      context: ./routes-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "2222:2222"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - 'eureka-server'
+
 networks:
   postgres:
     driver: bridge
