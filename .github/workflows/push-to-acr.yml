@@ -1,0 +1,45 @@
+name: Push to Azure Container Registry
+on:
+  push:
+    branches:
+      - dev-2.0
+
+  workflow_dispatch:
+
+jobs:
+  push-to-azure-container-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.WORKFLOW }}
+
+      - name: Set up JDK    
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@v1.2.1
+        with:
+          java-version: 17
+
+      - name: Build with Maven (skip tests)
+        run: mvn clean package -DskipTests -Pproduction
+
+      - name: Login to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker-compose build
+
+      - name: Push Docker image to Azure Container Registry
+        run: |
+            docker tag connect:latest ${{ secrets.REGISTRY_LOGIN_SERVER }}/connect:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/connect:${{ github.sha }
