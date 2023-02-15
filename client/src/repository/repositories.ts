@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import httpClient from '../infrastructure/http-client';
 
 const ServerLocation = 'https://connect-navigation.azurewebsites.net/api/v2/features/';
 

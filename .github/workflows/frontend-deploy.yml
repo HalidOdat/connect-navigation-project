@@ -3,14 +3,22 @@ name: Publish to GitHub Pages
 on:
   push:
     branches:
-    - frontend
+      - dev-2.0
+
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.WORKFLOW }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v2
@@ -20,9 +28,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Run tests
-    #   run: npm run test:headless
-
     - name: Build
       run: npm run build:prod
 
@@ -31,10 +36,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         personal_token: ${{ secrets.WORKFLOW }}
-        external_repository: connect-navigation/connect-navigation.github.io
-        publish_branch: main
-        publish_dir: dist/client
+        publish_dir: client/dist/client
         enable_jekyll: true
         allow_empty_commit: true
         force_orphan: true
-

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import httpClient from '../infrastructure/http-client';
-import {Point} from "ol/geom";
+import { Point } from "ol/geom";
 
 const ServerLocation = 'https://connect-navigation.azurewebsites.net/api/v2/';
 
