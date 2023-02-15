@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 
 const ServerLocation = 'https://connect-navigation.azurewebsites.net/api/v2/features/';
 
+export interface FeatureRepository {
+  all(): Promise<object[]>;
+}
+
 @Injectable()
-export class CoffeeShopRepository {
+export class CoffeeShopRepository implements FeatureRepository {
   async all() {
     const resp = await fetch(ServerLocation + 'coffee-shops/all');
     const data = await resp.json();
@@ -12,7 +16,7 @@ export class CoffeeShopRepository {
 }
 
 @Injectable()
-export class GasStationRepository {
+export class GasStationRepository implements FeatureRepository {
   async all() {
     const resp = await fetch(ServerLocation + 'gas-stations/all');
     const data = await resp.json();
@@ -21,7 +25,7 @@ export class GasStationRepository {
 }
 
 @Injectable()
-export class HotelRepository {
+export class HotelRepository implements FeatureRepository {
   async all() {
     const resp = await fetch(ServerLocation + 'hotels/all');
     const data = await resp.json();
@@ -30,7 +34,7 @@ export class HotelRepository {
 }
 
 @Injectable()
-export class SuperMarketRepository {
+export class SuperMarketRepository implements FeatureRepository {
   async all() {
     const resp = await fetch(ServerLocation + 'super-markets/all');
     const data = await resp.json();
@@ -39,7 +43,7 @@ export class SuperMarketRepository {
 }
 
 @Injectable()
-export class RestaurantRepository {
+export class RestaurantRepository implements FeatureRepository {
   async all() {
     const resp = await fetch(ServerLocation + 'restaurants/all');
     const data = await resp.json();

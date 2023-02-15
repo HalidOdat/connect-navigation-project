@@ -9,6 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+// Features in our application represent a location,
+// name and other information about places that offer services,
+// such as gas stations, hotels, etc.
 @Data
 @Entity
 @NoArgsConstructor
