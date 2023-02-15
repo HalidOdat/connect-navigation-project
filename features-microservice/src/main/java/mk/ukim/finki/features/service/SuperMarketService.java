@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SuperMarketService {
     List<SuperMarket> findAll();
+
+    void save(SuperMarket superMarket);
 }

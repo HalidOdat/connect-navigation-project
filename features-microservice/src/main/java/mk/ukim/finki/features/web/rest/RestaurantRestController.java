@@ -1,5 +1,6 @@
 package mk.ukim.finki.features.web.rest;
 
+import lombok.AllArgsConstructor;
 import mk.ukim.finki.features.model.Restaurant;
 import mk.ukim.finki.features.service.RestaurantService;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,9 @@ import java.util.List;
 @RequestMapping(value = "/api/v2/features/restaurants")
 @Validated
 @CrossOrigin(origins = "*")
+@AllArgsConstructor
 public class RestaurantRestController {
     private final RestaurantService service;
-
-    public RestaurantRestController(RestaurantService service) {
-        this.service = service;
-    }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Restaurant>> getAll() {

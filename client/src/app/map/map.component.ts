@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import 'ol/ol.css';
+
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { OSM } from 'ol/source';
@@ -20,16 +20,14 @@ import {Size} from "ol/size";
 import Geolocation from 'ol/Geolocation';
 import CircleStyle from "ol/style/Circle";
 import {RouteRepository} from "../../repository/route";
-import {Polyline} from "ol/format";
 import LayerGroup from "ol/layer/Group";
-import {Layer} from "ol/layer";
+
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css', '../../../node_modules/ol/ol.css']
 })
-
 export class MapComponent implements OnInit {
   public map!: Map
   public center!: number[]

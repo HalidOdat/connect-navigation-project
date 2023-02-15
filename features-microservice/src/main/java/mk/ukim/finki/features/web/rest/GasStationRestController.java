@@ -1,5 +1,6 @@
 package mk.ukim.finki.features.web.rest;
 
+import lombok.AllArgsConstructor;
 import mk.ukim.finki.features.model.GasStation;
 import mk.ukim.finki.features.service.GasStationService;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,9 @@ import java.util.List;
 @RequestMapping(value = "/api/v2/features/gas-stations")
 @Validated
 @CrossOrigin(origins = "*")
+@AllArgsConstructor
 public class GasStationRestController {
     private final GasStationService gasStationService;
-
-    public GasStationRestController(GasStationService gasStationService) {
-        this.gasStationService = gasStationService;
-    }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<GasStation>> getAll() {

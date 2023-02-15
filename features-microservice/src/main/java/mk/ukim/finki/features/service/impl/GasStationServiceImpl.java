@@ -1,5 +1,6 @@
 package mk.ukim.finki.features.service.impl;
 
+import lombok.AllArgsConstructor;
 import mk.ukim.finki.features.bootstrap.DataHolder;
 import mk.ukim.finki.features.model.GasStation;
 import mk.ukim.finki.features.repository.GasStationRepository;
@@ -9,18 +10,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class GasStationServiceImpl implements GasStationService {
     final private GasStationRepository repository;
 
-    public GasStationServiceImpl(GasStationRepository repository) {
-        this.repository = repository;
+    @Override
+    public List<GasStation> findAll() {
+        return repository.findAll();
     }
 
     @Override
-    public List<GasStation> findAll() {
-        if (repository.count() == 0) {
-            repository.saveAll(DataHolder.gasStations);
-        }
-        return repository.findAll();
+    public void save(GasStation gasStation) {
+        this.repository.saveAndFlush(gasStation);
     }
 }

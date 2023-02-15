@@ -1,7 +1,9 @@
 package mk.ukim.finki.features.bootstrap;
 
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import mk.ukim.finki.features.model.*;
+import mk.ukim.finki.features.service.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -12,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class DataHolder {
-    public static List<CoffeeShop> coffeeShops = new ArrayList<>();
-    public static List<GasStation> gasStations = new ArrayList<>();
-    public static List<Hotel> hotels = new ArrayList<>();
-    public static List<Restaurant> restaurants = new ArrayList<>();
-    public static List<SuperMarket> superMarkets = new ArrayList<>();
+    private final CoffeeShopService coffeeShopService;
+    private final GasStationService gasStationService;
+    private final HotelService hotelService;
+    private final RestaurantService restaurantService;
+    private final SuperMarketService superMarketService;
 
     @PostConstruct
     void init() throws IOException {
@@ -33,7 +36,7 @@ public class DataHolder {
         String fileString = Files.readString(Path.of("bootstrap/coffee_shops.csv"), Charset.defaultCharset());
         List<String[]> values = pipe.run(fileString);
         for (String[] value : values) {
-            coffeeShops.add(
+            coffeeShopService.save(
                 CoffeeShop.builder()
                     .id(Long.parseLong(value[0]))
                     .lat(Double.parseDouble(value[1]))
@@ -49,7 +52,7 @@ public class DataHolder {
         fileString = Files.readString(Path.of("bootstrap/gas_stations.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            gasStations.add(
+            gasStationService.save(
                 GasStation.builder()
                     .id(Long.parseLong(value[0]))
                     .lat(Double.parseDouble(value[1]))
@@ -65,7 +68,7 @@ public class DataHolder {
         fileString = Files.readString(Path.of("bootstrap/hotels.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            hotels.add(
+            hotelService.save(
                 Hotel.builder()
                     .id(Long.parseLong(value[0]))
                     .lat(Double.parseDouble(value[1]))
@@ -81,7 +84,7 @@ public class DataHolder {
         fileString = Files.readString(Path.of("bootstrap/restaurants.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            restaurants.add(
+            restaurantService.save(
                 Restaurant.builder()
                     .id(Long.parseLong(value[0]))
                     .lat(Double.parseDouble(value[1]))
@@ -97,7 +100,7 @@ public class DataHolder {
         fileString = Files.readString(Path.of("bootstrap/supermarkets.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            superMarkets.add(
+            superMarketService.save(
                 SuperMarket.builder()
                     .id(Long.parseLong(value[0]))
                     .lat(Double.parseDouble(value[1]))

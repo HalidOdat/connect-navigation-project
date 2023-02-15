@@ -1,5 +1,6 @@
 package mk.ukim.finki.routes.web.rest;
 
+import lombok.AllArgsConstructor;
 import mk.ukim.finki.routes.model.Point;
 import mk.ukim.finki.routes.model.Route;
 import mk.ukim.finki.routes.service.RouteService;
@@ -12,12 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/v2/route")
 @Validated
 @CrossOrigin(origins = "*")
+@AllArgsConstructor
 public class RouteRestController {
 
     private final RouteService service;
-    public RouteRestController(RouteService service) {
-        this.service = service;
-    }
 
     @GetMapping(value = "/{from-lat}/{from-lon}/{to-lat}/{to-lon}")
     public ResponseEntity<Route> getAll(
@@ -28,11 +27,12 @@ public class RouteRestController {
     ) {
         Point from = new Point(fromLat, fromLon);
         Point to = new  Point(toLat, toLon);
-        Route route = null;
+
         try {
-            route = service.getRoute(from, to);
+            Route route = service.getRoute(from, to);
+            return new ResponseEntity<>(route, HttpStatus.OK);
         } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(route, HttpStatus.OK);
     }
 }
