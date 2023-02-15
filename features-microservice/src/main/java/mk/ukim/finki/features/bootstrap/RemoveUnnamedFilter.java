@@ -9,11 +9,11 @@ public class RemoveUnnamedFilter implements Filter {
         List<String> list = (List<String>) input;
         List<String[]> result = new ArrayList<>();
         for (String value : list) {
-            String p[] = value.split(",");
-            if (p.length == 3 || p[3].isEmpty()) {
+            String[] parts = value.split(",");
+            if (parts.length == 3 || parts[3].isEmpty()) {
                 continue;
             }
-            result.add(p);
+            result.add(parts);
         }
         return result;
     }

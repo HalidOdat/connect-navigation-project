@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class GasStation extends Feature {
     @Builder
-    public GasStation(Long id, Double lat, Double lon, String name, byte stars, String city, String street) {
-        super(id, lat, lon, name, stars, city, street);
+    public GasStation(Long id, Double lat, Double lon, String name, byte stars, String city) {
+        super(id, lat, lon, name, stars, city);
     }
 
 }

@@ -23,5 +23,4 @@ public abstract class Feature {
 
     private byte stars;
     private String city;
-    private String street;
 }

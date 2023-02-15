@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -44,7 +43,6 @@ public class DataHolder {
                     .name(value[3])
                     .stars(Byte.parseByte(value[4].trim()))
                     .city(value[5])
-                    .street(value.length > 6 ? value[6] : "")
                     .build()
             );
         }
@@ -60,7 +58,6 @@ public class DataHolder {
                     .name(value[3])
                     .stars(Byte.parseByte(value[4].trim()))
                     .city(value[5])
-                    .street(value.length > 6 ? value[6] : "")
                     .build()
             );
         }
@@ -76,7 +73,6 @@ public class DataHolder {
                     .name(value[3])
                     .stars(Byte.parseByte(value[4].trim()))
                     .city(value[5])
-                    .street(value.length > 6 ? value[6] : "")
                     .build()
             );
         }
@@ -92,7 +88,6 @@ public class DataHolder {
                     .name(value[3])
                     .stars(Byte.parseByte(value[4].trim()))
                     .city(value[5])
-                    .street(value.length > 6 ? value[6] : "")
                     .build()
             );
         }
@@ -108,7 +103,6 @@ public class DataHolder {
                     .name(value[3])
                     .stars(Byte.parseByte(value[4].trim()))
                     .city(value[5])
-                    .street(value.length > 6 ? value[6] : "")
                     .build()
             );
         }

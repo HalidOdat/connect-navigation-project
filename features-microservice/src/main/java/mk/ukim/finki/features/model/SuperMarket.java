@@ -9,7 +9,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class SuperMarket extends Feature {
     @Builder
-    public SuperMarket(Long id, Double lat, Double lon, String name, byte stars, String city, String street) {
-        super(id, lat, lon, name, stars, city, street);
+    public SuperMarket(Long id, Double lat, Double lon, String name, byte stars, String city) {
+        super(id, lat, lon, name, stars, city);
     }
 }
