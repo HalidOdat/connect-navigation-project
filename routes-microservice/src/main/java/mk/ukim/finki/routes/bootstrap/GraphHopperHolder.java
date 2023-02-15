@@ -8,22 +8,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GraphHopperHolder {
-    public static GraphHopper hopper;
+    public static GraphHopper instance;
 
     @PostConstruct
     void init() {
-        hopper = new GraphHopper();
-        hopper.setOSMFile("bootstrap/macedonia-latest.osm.pbf");
+        instance = new GraphHopper();
+        instance.setOSMFile("bootstrap/macedonia-latest.osm.pbf");
         // specify where to store graphhopper files
-        hopper.setGraphHopperLocation("target/routing-graph-cache");
+        instance.setGraphHopperLocation("target/routing-graph-cache");
 
         // see docs/core/profiles.md to learn more about profiles
-        hopper.setProfiles(new Profile("car").setVehicle("car").setWeighting("fastest").setTurnCosts(false));
+        instance.setProfiles(new Profile("car").setVehicle("car").setWeighting("fastest").setTurnCosts(false));
 
         // this enables speed mode for the profile we called car
-        hopper.getCHPreparationHandler().setCHProfiles(new CHProfile("car"));
+        instance.getCHPreparationHandler().setCHProfiles(new CHProfile("car"));
 
-        // now this can take minutes if it imports or a few seconds for loading of course this is dependent on the area you import
-        hopper.importOrLoad();
+        // now this can take minutes if it imports or a few seconds for loading of
+        // course this is dependent on the area you import
+        instance.importOrLoad();
     }
 }

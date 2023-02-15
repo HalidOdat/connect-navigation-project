@@ -8,8 +8,8 @@ public class RemoveUnnamedFilter implements Filter {
     public Object run(Object input) {
         List<String> list = (List<String>) input;
         List<String[]> result = new ArrayList<>();
-        for (String v : list) {
-            String p[] = v.split(",");
+        for (String value : list) {
+            String p[] = value.split(",");
             if (p.length == 3 || p[3].isEmpty()) {
                 continue;
             }

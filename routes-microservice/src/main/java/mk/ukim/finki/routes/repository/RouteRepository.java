@@ -20,21 +20,22 @@ import java.util.List;
 @Repository
 public class RouteRepository {
     public Route getRoute(Point from, Point to) {
-        GraphHopper hopper = GraphHopperHolder.hopper;
+        GraphHopper hopper = GraphHopperHolder.instance;
 
         // simple configuration of the request object
-        GHRequest req = new GHRequest(from.getLat(), from.getLon(), to.getLat(), to.getLon()).
-                // note that we have to specify which profile we are using even when there is only one like here
-                        setProfile("car").
-                // define the language for the turn instructions
-                        setLocale(Locale.US);
+        GHRequest req = new GHRequest(from.getLat(), from.getLon(), to.getLat(), to.getLon())
+            // note that we have to specify which profile we are using even when there is only one like here
+            .setProfile("car")
+            // define the language for the turn instructions
+            .setLocale(Locale.US);
+
         GHResponse rsp = hopper.route(req);
 
         // handle errors
         if (rsp.hasErrors())
             throw new RuntimeException(rsp.getErrors().toString());
 
-        // use the best path, see the GHResponse class for more possibilities.
+        // Use the best path, see the GHResponse class for more possibilities.
         ResponsePath path = rsp.getBest();
 
         PointList pointList = path.getPoints();

@@ -33,71 +33,81 @@ public class DataHolder {
         String fileString = Files.readString(Path.of("bootstrap/coffee_shops.csv"), Charset.defaultCharset());
         List<String[]> values = pipe.run(fileString);
         for (String[] value : values) {
-            coffeeShops.add(new CoffeeShop(
-                    Long.parseLong(value[0]),
-                    Double.parseDouble(value[1]),
-                    Double.parseDouble(value[2]),
-                    value[3],
-                    Byte.parseByte(value[4].trim()),
-                    value[5],
-                    value.length > 6 ? value[6] : ""
-            ));
+            coffeeShops.add(
+                CoffeeShop.builder()
+                    .id(Long.parseLong(value[0]))
+                    .lat(Double.parseDouble(value[1]))
+                    .lon(Double.parseDouble(value[2]))
+                    .name(value[3])
+                    .stars(Byte.parseByte(value[4].trim()))
+                    .city(value[5])
+                    .street(value.length > 6 ? value[6] : "")
+                    .build()
+            );
         }
 
         fileString = Files.readString(Path.of("bootstrap/gas_stations.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            gasStations.add(new GasStation(
-                    Long.parseLong(value[0]),
-                    Double.parseDouble(value[1]),
-                    Double.parseDouble(value[2]),
-                    value[3],
-                    Byte.parseByte(value[4].trim()),
-                    value[5],
-                    value.length > 6 ? value[6] : ""
-            ));
+            gasStations.add(
+                GasStation.builder()
+                    .id(Long.parseLong(value[0]))
+                    .lat(Double.parseDouble(value[1]))
+                    .lon(Double.parseDouble(value[2]))
+                    .name(value[3])
+                    .stars(Byte.parseByte(value[4].trim()))
+                    .city(value[5])
+                    .street(value.length > 6 ? value[6] : "")
+                    .build()
+            );
         }
 
         fileString = Files.readString(Path.of("bootstrap/hotels.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            hotels.add(new Hotel(
-                    Long.parseLong(value[0]),
-                    Double.parseDouble(value[1]),
-                    Double.parseDouble(value[2]),
-                    value[3],
-                    Byte.parseByte(value[4].trim()),
-                    value[5],
-                    value.length > 6 ? value[6] : ""
-            ));
+            hotels.add(
+                Hotel.builder()
+                    .id(Long.parseLong(value[0]))
+                    .lat(Double.parseDouble(value[1]))
+                    .lon(Double.parseDouble(value[2]))
+                    .name(value[3])
+                    .stars(Byte.parseByte(value[4].trim()))
+                    .city(value[5])
+                    .street(value.length > 6 ? value[6] : "")
+                    .build()
+            );
         }
 
         fileString = Files.readString(Path.of("bootstrap/restaurants.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            restaurants.add(new Restaurant(
-                    Long.parseLong(value[0]),
-                    Double.parseDouble(value[1]),
-                    Double.parseDouble(value[2]),
-                    value[3],
-                    Byte.parseByte(value[4].trim()),
-                    value[5],
-                    value.length > 6 ? value[6] : ""
-            ));
+            restaurants.add(
+                Restaurant.builder()
+                    .id(Long.parseLong(value[0]))
+                    .lat(Double.parseDouble(value[1]))
+                    .lon(Double.parseDouble(value[2]))
+                    .name(value[3])
+                    .stars(Byte.parseByte(value[4].trim()))
+                    .city(value[5])
+                    .street(value.length > 6 ? value[6] : "")
+                    .build()
+            );
         }
 
         fileString = Files.readString(Path.of("bootstrap/supermarkets.csv"), Charset.defaultCharset());
         values = pipe.run(fileString);
         for (String[] value : values) {
-            superMarkets.add(new SuperMarket(
-                    Long.parseLong(value[0]),
-                    Double.parseDouble(value[1]),
-                    Double.parseDouble(value[2]),
-                    value[3],
-                    Byte.parseByte(value[4].trim()),
-                    value[5],
-                    value.length > 6 ? value[6] : ""
-            ));
+            superMarkets.add(
+                SuperMarket.builder()
+                    .id(Long.parseLong(value[0]))
+                    .lat(Double.parseDouble(value[1]))
+                    .lon(Double.parseDouble(value[2]))
+                    .name(value[3])
+                    .stars(Byte.parseByte(value[4].trim()))
+                    .city(value[5])
+                    .street(value.length > 6 ? value[6] : "")
+                    .build()
+            );
         }
     }
 }

@@ -4,11 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Feature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,18 +24,4 @@ public abstract class Feature {
     private byte stars;
     private String city;
     private String street;
-
-    public Feature(Long id, Double lat, Double lon, String name, byte stars, String city, String street) {
-        this.id = id;
-        this.lat = lat;
-        this.lon = lon;
-        this.name = name;
-        this.stars = stars;
-        this.city = city;
-        this.street = street;
-    }
-
-    public Feature() {
-
-    }
 }

@@ -1,21 +1,18 @@
 package mk.ukim.finki.routes.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@Builder
 public class Route {
     Point from;
     Point to;
     List<Point> points;
 
     double distance;
-
-    public Route(Point from, Point to, List<Point> points, double distance) {
-        this.from = from;
-        this.to = to;
-        this.points = points;
-        this.distance = distance;
-    }
 }
