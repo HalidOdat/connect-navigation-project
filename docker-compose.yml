@@ -11,16 +11,12 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
-    ports:
-      - "5432:5432"
     networks:
       - postgres
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "echo", "hi"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "exit", "0"]
+      start_period: 2m
 
   eureka-server:
     image: connectnavigation.azurecr.io/eureka-server
@@ -28,8 +24,6 @@ services:
     build:
       context: ./eureka-server
       dockerfile: Dockerfile
-    ports:
-      - "8761:8761"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
@@ -44,8 +38,6 @@ services:
     build:
       context: ./features-microservice
       dockerfile: Dockerfile
-    ports:
-      - "1111:1111"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
@@ -64,8 +56,6 @@ services:
     build:
       context: ./routes-microservice
       dockerfile: Dockerfile
-    ports:
-      - "2222:2222"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
@@ -82,7 +72,7 @@ services:
       context: ./api-gateway
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "80:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
