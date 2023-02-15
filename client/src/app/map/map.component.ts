@@ -17,10 +17,10 @@ import {
 } from "../../repository/repositories";
 import {Fill, Icon, Stroke, Style, Text} from "ol/style";
 import {Size} from "ol/size";
-import Geolocation from 'ol/Geolocation';
 import CircleStyle from "ol/style/Circle";
 import {RouteRepository} from "../../repository/route";
 import LayerGroup from "ol/layer/Group";
+import {defaults} from "ol/control"
 
 
 @Component({
@@ -77,6 +77,7 @@ export class MapComponent implements OnInit {
 
     // Create the map.
     this.map = new Map({
+      controls: defaults({ attribution: false }),
       layers: [
         new TileLayer({
           source: new OSM(),
@@ -89,34 +90,11 @@ export class MapComponent implements OnInit {
       view: view,
     });
 
-    // Your location on the map, for now we assign it to an arbitrary Skopje location.
-    let yourLocation: number[] | undefined = [21.4051544, 42.0112726];
+    // Your location on the map w we assign it to an arbitrary Skopje location.
+    let yourLocation: number[] = [21.4051544, 42.0112726];
 
     let yourFeature = new Feature({
       geometry: new Point(yourLocation),
-    });
-
-    // The geolocation module is used to give the notification,
-    // to allow the browser to give the location detail.
-    //
-    // NOTE: this only work if the connection is HTTPS
-    const geolocation = new Geolocation({
-      // enableHighAccuracy must be set to true to have the heading value.
-      trackingOptions: {
-        enableHighAccuracy: true,
-      },
-      projection: view.getProjection(),
-    });
-
-    // handle geolocation error.
-    geolocation.on('error', function (error) {
-      // @ts-ignore
-      console.log(error.message);
-    });
-
-    const accuracyFeature = new Feature();
-    geolocation.on('change:accuracyGeometry', function () {
-      accuracyFeature.setGeometry(geolocation.getAccuracyGeometry() || undefined);
     });
 
     const positionFeature = new Feature();
@@ -135,21 +113,6 @@ export class MapComponent implements OnInit {
       })
     );
 
-    geolocation.on('change:position', function () {
-      const coordinates = geolocation.getPosition();
-      yourLocation = coordinates;
-      // @ts-ignore
-      yourFeature.setGeometry(new Point(yourLocation));
-      positionFeature.setGeometry(coordinates ? new Point(coordinates) : undefined);
-    });
-
-    new VectorLayer({
-      map: this.map,
-      source: new VectorSource({
-        features: [accuracyFeature, positionFeature],
-      }),
-    });
-
     new VectorLayer({
       map: this.map,
       source: new VectorSource({
@@ -158,7 +121,7 @@ export class MapComponent implements OnInit {
       style: homePointStyle,
     });
 
-      let map = this.map;
+    let map = this.map;
 
     let routes: object[] = []
     map.on('click', function (e) {
@@ -403,16 +366,9 @@ export class MapComponent implements OnInit {
       }
     });
 
-    // This is done to remove a label that appears on the map.
-    // it can be ignored.
-    let d = document.getElementsByTagName('ul');
-    if (d) {
-      let l = d.item(0);
-      if (l) {
-        l.setAttribute("hidden", "value");
-      }
-    }
-
     get().then(x => {});
+
+    // Render the map.
+    map.render();
   }
 }
