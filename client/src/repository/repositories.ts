@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import httpClient from '../infrastructure/http-client';
 
-const ServerLocation = 'https://connect-production-91d2.up.railway.app';
+const ServerLocation = 'https://connect-navigation.azurewebsites.net/api/v2/features/';
 
 @Injectable()
 export class CoffeeShopRepository {
   async all() {
-    const resp = await fetch(ServerLocation + '/api/coffee-shops/all');
+    const resp = await fetch(ServerLocation + 'coffee-shops/all');
     const data = await resp.json();
     return data;
   }
@@ -15,7 +15,7 @@ export class CoffeeShopRepository {
 @Injectable()
 export class GasStationRepository {
   async all() {
-    const resp = await fetch(ServerLocation + '/api/gas-stations/all');
+    const resp = await fetch(ServerLocation + 'gas-stations/all');
     const data = await resp.json();
     return data;
   }
@@ -24,7 +24,7 @@ export class GasStationRepository {
 @Injectable()
 export class HotelRepository {
   async all() {
-    const resp = await fetch(ServerLocation + '/api/hotels/all');
+    const resp = await fetch(ServerLocation + 'hotels/all');
     const data = await resp.json();
     return data;
   }
@@ -33,7 +33,7 @@ export class HotelRepository {
 @Injectable()
 export class SuperMarketRepository {
   async all() {
-    const resp = await fetch(ServerLocation + '/api/super-markets/all');
+    const resp = await fetch(ServerLocation + 'super-markets/all');
     const data = await resp.json();
     return data;
   }
@@ -42,7 +42,7 @@ export class SuperMarketRepository {
 @Injectable()
 export class RestaurantRepository {
   async all() {
-    const resp = await fetch(ServerLocation + '/api/restaurants/all');
+    const resp = await fetch(ServerLocation + 'restaurants/all');
     const data = await resp.json();
     return data;
   }
